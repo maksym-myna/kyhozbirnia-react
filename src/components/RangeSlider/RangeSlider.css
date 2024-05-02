@@ -1,0 +1,12 @@
+@import '../../variables.css';
+
+.range-slider-container {
+    margin: 0 0.6rem;
+}
+
+.range-slider-values-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}

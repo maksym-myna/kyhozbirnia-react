@@ -1,0 +1,18 @@
+/* .text-field .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+} */
+
+.text-field .MuiInputBase-root {
+    height: 3rem;
+    /* background-color: wheat; */
+    /* background-color: var(--primary-color); */
+    /* padding-top: .2rem; */
+}
+
+.text-field .MuiInputLabel-root {
+    line-height: 1.5rem;
+}

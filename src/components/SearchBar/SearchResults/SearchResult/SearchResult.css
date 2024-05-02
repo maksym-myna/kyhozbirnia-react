@@ -1,0 +1,36 @@
+@import '../../../../variables.css';
+
+
+.search-result-container {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    padding: 0.5rem 10px;
+    border-top: 1px solid var(--secondary-color);
+    box-shadow: var(--containers-box-shadow);
+}
+
+.focused {
+    background-color: var(--secondary-color-lighter);
+    color: var(--primary-color);
+    z-index: 101 !important;
+}
+
+.search-result-image {
+    margin-left: 10px
+}
+
+.search-result {
+    font-size: 1.15rem;
+    z-index: 100;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.search-result-container:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}

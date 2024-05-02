@@ -1,0 +1,36 @@
+.MuiToggleButton-root.toggle-button {
+    color: var(--secondary-color);
+    background: var(--primary-color);
+    text-transform: none;
+    display: flex;
+    gap: 0.05rem;
+}
+
+
+.MuiToggleButton-root.toggle-button:first-of-type {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.MuiToggleButton-root.toggle-button:last-of-type {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.MuiToggleButton-root.toggle-button:hover {
+    color: var(--primary-color);
+    background: var(--secondary-color-lighter);
+}
+
+.MuiToggleButton-root.toggle-button.Mui-selected:hover {
+    color: var(--secondary-color);
+    background: var(--primary-color-darker);
+}
+
+.MuiToggleButton-root.toggle-button.Mui-selected {
+    color: var(--primary-color);
+    background: var(--secondary-color);
+}
+
+.MuiToggleButtonGroup-root.toggle-button-group {
+    display: flex;
+    justify-content: center;
+}

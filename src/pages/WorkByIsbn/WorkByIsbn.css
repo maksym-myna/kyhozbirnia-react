@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
+.work-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: var(--secondary-color);
+    gap: 1.5rem;
+    background-color: var(--primary-color);
+}
+
+.main-work-info-container {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+}
+
+.work-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Prata', serif;
+}
+
+.work-subtitle {
+    margin-bottom: 0.7rem;
+}
+
+.work-list-items {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.work-list-item {
+    font-style: bold;
+    font-size: 1.1rem;
+}
+
+.work-list-item:hover {
+    color: var(--focus-color);
+}
+
+.work-info-planes {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 40%;
+    margin-bottom: 2rem;
+}
+
+.work-buttons-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.copies-left {
+    text-align: center;
+    width: 16rem;
+}

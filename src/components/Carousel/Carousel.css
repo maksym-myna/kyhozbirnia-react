@@ -1,0 +1,9 @@
+@import "../../variables.css";
+
+.carousel-container {
+    max-width: calc(100vw - 1rem);
+    background-color: #f9f9f9;
+    box-shadow: var(--containers-box-shadow);
+    padding: 0;
+    padding-bottom: 2.5rem;
+}

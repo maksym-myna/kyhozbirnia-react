@@ -1,0 +1,41 @@
+@import '../../variables.css';
+
+.input-container {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    box-shadow: var(--containers-box-shadow);
+    border-radius: 20rem;
+    background-color: white;
+    transition: border-radius 0.45s ease-in;
+}
+
+.search-icon {
+    /* background-color: white; */
+    color: var(--secondary-color);
+    margin: 0 0px 0 10px;
+}
+
+.search-bar,
+input {
+    padding: 10px;
+    border-radius: inherit;
+    border: none;
+    width: 100%;
+    /* line-height: 1rem; */
+    font-size: 1.25rem;
+    background-color: inherit;
+    color: var(--secondary-color);
+}
+
+.search-bar:focus,
+input:focus {
+    outline: none;
+}
+
+.search-bar-container:focus-within {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}

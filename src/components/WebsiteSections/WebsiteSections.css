@@ -1,0 +1,50 @@
+@import '../../variables.css';
+
+.sections {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 0 1rem 0;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    /* opacity: 0.8; */
+    max-width: 800px;
+    font-weight: 400;
+    margin: 0rem auto 0rem auto;
+}
+
+.section-item {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+}
+
+.section-item:hover {
+    cursor: pointer;
+    border-bottom: 2px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.selected-section {
+    border-bottom: 2px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.footer-sections {
+    color: var(--primary-color);
+    /* width: 60%; */
+}
+
+.footer-sections>* {
+    font-size: 1.25rem;
+}
+
+.footer-sections :hover {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3.5rem;
+    align-items: center;
+}

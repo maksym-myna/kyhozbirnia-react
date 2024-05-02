@@ -1,0 +1,28 @@
+@import "../../../variables.css";
+
+.carousel-arrow {
+    position: absolute;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 3rem;
+    width: 3rem;
+    z-index: 1;
+    margin: 0 4% 5rem;
+
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+
+    border-radius: 90%;
+    box-shadow: 0 0 0.15rem 0.15rem rgba(0, 0, 0, 0.3);
+
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.carousel-arrow:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}

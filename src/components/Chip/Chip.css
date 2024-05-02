@@ -1,0 +1,30 @@
+.chip {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    /* margin: 0.15rem; */
+    width: fit-content;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    /* font-size: 1rem; */
+}
+
+.chip:nth-of-type(even) {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
+.remove-chip {
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: inherit;
+    /* color: bkue; */
+}
+
+.remove-chip:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+}

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@import '../../variables.css';
+
+.works-main-container {
+    display: flex;
+    justify-content: right;
+    margin: 0 3%;
+}
+
+.page-title {
+    font-family: 'Prata', serif;
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0 0.75rem 0;
+    font-weight: 700;
+}

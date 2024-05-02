@@ -1,0 +1,28 @@
+.big-query-export {
+    background-color: var(--secondary-background-color);
+    padding-top: 2.5rem;
+}
+
+.bq-top-section-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.bq-top-section {
+    display: flex;
+    width: 75%;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.MuiCheckbox-root.checkbox.Mui-checked {
+    color: var(--secondary-color);
+}

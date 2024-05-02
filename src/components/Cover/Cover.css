@@ -1,0 +1,31 @@
+.work-cover-container {
+    background-color: var(--secondary-background-color);
+    /* width: 300px; */
+    /* height: 360px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.work-cover-container:hover {
+    cursor: pointer;
+}
+
+.work-cover {
+    width: auto;
+    max-height: 77.77%;
+    max-width: 66.66%;
+    object-fit: contain;
+    box-shadow: 10px 10px 10px 2px rgba(0, 0, 0, 0.4);
+}
+
+.work-cover:hover {
+    transform: scale(1.05);
+}
+
+.work-cover,
+.work-cover:hover {
+    transition: transform 2.5s;
+}

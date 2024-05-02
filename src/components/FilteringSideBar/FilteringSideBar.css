@@ -1,0 +1,72 @@
+.filters-container {
+    width: 25%;
+    padding: 2rem;
+    background-color: var(--background-color);
+    height: fit-content;
+    border-radius: 2rem;
+}
+
+.filter-container,
+.MuiToggleButton-root.toggle-button {
+    margin-bottom: 1.5rem;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid #9eb1b3;
+    border-radius: 1rem;
+    transition: border 0.3s;
+}
+
+.with-slider {
+    max-height: 115px !important;
+}
+
+.filter-container:hover {
+    border: 1px solid var(--secondary-color);
+    transition: border 0.3s;
+}
+
+.filter-title {
+    color: var(--secondary-color);
+    position: absolute;
+    transform: translateY(-27px) translateX(5px);
+    padding: 0 6px;
+    background-color: var(--background-color);
+}
+
+.filter-chips-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.search-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.clear-filters {
+    border-radius: 90%;
+    padding: 0.5rem;
+    background-color: var(--secondary-color);
+}
+
+.clear-filters:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    fill: var(--secondary-color) !important;
+}
+
+.MuiSlider-root.slider {
+    color: var(--secondary-color);
+}
+
+.MuiCheckbox-root.checkbox.Mui-checked {
+    color: var(--secondary-color);
+}
