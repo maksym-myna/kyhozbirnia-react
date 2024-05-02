@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import './WorkByIsbn.css';
 import { useParams } from "react-router-dom";
 import { ListingType, Medium } from "../../components/FilteringSideBar";
@@ -13,12 +13,15 @@ import Button from "../../components/Button";
 import SplitButton from "../../components/SplitButton";
 import axios from "axios";
 import { defaultSnackBar, Severity, SnackBarContext } from "../../contexts/SnackBarContext";
+import PostPopup from "../../components/PostPopup";
+import EditIcon from '@mui/icons-material/Edit';
+import { AuthContext } from "../../contexts/AuthContext";
 interface IdNameResponse {
     id: string;
     name: string;
 }
 
-interface Work {
+export interface Work {
     id: number;
     title: string;
     pages: number;
@@ -41,6 +44,7 @@ interface Work {
 }
 
 const WorkByIsbn: React.FC = () => {
+    const { role } = useContext(AuthContext);
     const { isbn } = useParams<{ isbn: string }>();
     const [work, setWork] = React.useState<any>();
     const [statuses, setStatuses] = React.useState<ListingType[]>([]);
@@ -49,7 +53,11 @@ const WorkByIsbn: React.FC = () => {
     const [listingTrigger, setListingTrigger] = React.useState(false);
     const [listingStatus, setListingStatus] = React.useState<ListingType>('WANT_TO_READ');
     const initialRender = useRef(0);
+    const [showPopup, setShowPopup] = useState(false);
 
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
     const openSnack = (severity: Severity, message: string) => {
         setSnackBar({ ...defaultSnackBar, open: true, severity: severity, message: message });
     }
@@ -90,6 +98,9 @@ const WorkByIsbn: React.FC = () => {
     }, [refreshTrigger]);
 
     const rateWork = async (event: React.ChangeEvent<{}>, value: number | null) => {
+        if (role === 'UNAUTHORIZED') {
+            return
+        }
         try {
             if (!value) return;
             const body = {
@@ -105,6 +116,9 @@ const WorkByIsbn: React.FC = () => {
     }
 
     useEffect(() => {
+        if (role === 'UNAUTHORIZED') {
+            return
+        }
         if (initialRender.current < 2) {
             initialRender.current++;
         } else {
@@ -158,7 +172,13 @@ const WorkByIsbn: React.FC = () => {
                                 {work.title.slice(0, 75) + (work.title.length > 75 ? '...' : '')}
                             </section>
                             <section className="work-subtitle">
-                                {work.releaseYear} · {<Link to={`/publishers/${work.publisher.name}`}> {work.publisher.name} </Link>} · {work.medium == 'BOOK' ? 'Папір' : work.medium == 'AUDIO' ? 'Авдіо' : 'Електронна'} · {work.pages}с.
+                                <span className='book-info-one-liner'>
+                                    {work.releaseYear} · {<Link to={`/publishers/${work.publisher.name}`}> {work.publisher.name} </Link>} · {work.medium == 'BOOK' ? 'Папір' : work.medium == 'AUDIO' ? 'Авдіо' : 'Електронна'} · {work.pages}с.
+                                </span>
+                                {
+                                    role === 'ADMIN' &&
+                                    <EditIcon className='edit-icon' onClick={togglePopup} />
+                                }
                             </section>
                             <section className="work-list-items">
                                 {work.authors.slice(0, 4).join(', ').split(',').map((author: string, index: number) => (
@@ -187,17 +207,23 @@ const WorkByIsbn: React.FC = () => {
                                     value={work.rating}
                                 />
                             </div>
-                            <div className="work-buttons-container">
-                                <div className="loan-container">
-                                    <div className="copies-left">
-                                        Одиниць залишилось: {work.availableCopies}
+                            {role === 'ADMIN' || role === 'USER' ?
+                                <div className="work-buttons-container">
+                                    <div className="loan-container">
+                                        <div className="copies-left">
+                                            Одиниць залишилось: {work.availableCopies}
+                                        </div>
+                                        <Button onClick={loanWork} inverted noshadow disabled={work.availableCopies === 0}>
+                                            Замовити
+                                        </Button>
                                     </div>
-                                    <Button onClick={loanWork} inverted noshadow disabled={work.availableCopies === 0}>
-                                        Замовити
-                                    </Button>
+                                    <SplitButton onClick={ListingHandler} statuses={statuses} />
                                 </div>
-                                <SplitButton onClick={ListingHandler} statuses={statuses} />
-                            </div>
+                                :
+                                <div className="login-to-see">
+                                    Увійдіть для розблокування повного функціоналу!
+                                </div>
+                            }
                         </div>
                     </section>
 
@@ -211,6 +237,7 @@ const WorkByIsbn: React.FC = () => {
                     </section>
                 </div>
             }
+            {showPopup && <PostPopup title={"Редагувати книжку"} togglePopup={togglePopup} destination={"works"} method="put" data={work} />}
             <Footer />
         </>
     )

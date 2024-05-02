@@ -65,10 +65,10 @@ const Header: React.FC<HeaderProps> = ({ currentPage, postButton }) => {
                             <Link to="/profile" className="profile-text">Профіль</Link>
                         </div>
                         :
-                        <Link to="/" className="profile-text-container">
+                        <div className="profile-text-container">
                             <LoginIcon style={{ width: "2rem", height: "2rem" }} onClick={handleLoginClick} />
                             <p className="profile-text" onClick={handleLoginClick}>Увійти</p>
-                        </Link>
+                        </div>
                     }
                 </section >
             </header >

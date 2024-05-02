@@ -25,7 +25,9 @@
 }
 
 .work-subtitle {
-    margin-bottom: 0.7rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .work-list-items {
@@ -60,4 +62,26 @@
 .copies-left {
     text-align: center;
     width: 16rem;
+}
+
+.edit-icon {
+    transition: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    transform: scale(1.1);
+}
+
+.login-to-see {
+    margin-top: 2rem;
+    box-shadow: var(--containers-strong-box-shadow);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: 22rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    font-size: 1.55rem;
+    text-align: center;
 }

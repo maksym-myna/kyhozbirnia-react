@@ -18,7 +18,7 @@ const SSEManager: React.FC<SSEManagerProps> = ({ destination, onLog }) => {
     }
 
     const connectToSSE = () => {
-        const sseSource = new EventSource(`${serverURL}/python/${destination}/`);
+        const sseSource = new EventSource(`${serverURL}/python/${destination}/`, { withCredentials: true });
 
         sseSource.onmessage = function (event) {
             onLog(`[${destination}] ${event.data}`);
@@ -26,6 +26,7 @@ const SSEManager: React.FC<SSEManagerProps> = ({ destination, onLog }) => {
 
         sseSource.onerror = function (event) {
             onLog(`[${destination}] Finished executing.`);
+            console.log('SSE error:', event);
             sseSource.close();
             setConnected(false);
         };

@@ -14,6 +14,7 @@ import axios from 'axios';
 import { serverURL } from '../../config';
 import './PostPopup.css';
 import { Medium } from '../FilteringSideBar';
+import { Work } from '../../pages/WorkByIsbn';
 
 interface NameRequest {
     name: string;
@@ -41,22 +42,31 @@ interface PostPopupProps {
     title: string;
     togglePopup: () => void;
     destination: string
+    method?: string;
+    data?: Work;
 }
 
-const PostPopup: React.FC<PostPopupProps> = ({ title, togglePopup, destination }) => {
+const PostPopup: React.FC<PostPopupProps> = ({ title, togglePopup, destination, method = 'post', data }) => {
 
     const [medium, setMedium] = useState<Medium>("BOOK");
-    const [name, setName] = useState("");
-    const [isbn, setIsbn] = useState("");
-    const [pages, setPages] = useState("");
-    const [weight, setWeight] = useState("");
-    const [copies, setCopies] = useState("");
+    const [name, setName] = useState(data?.title || "");
+    const [isbn, setIsbn] = useState(data?.isbn || "");
+    const [pages, setPages] = useState(data?.pages.toString() || "");
+    const [weight, setWeight] = useState(data?.weight.toString() || "");
+    const [copies, setCopies] = useState(data?.copies.toString() || "");
     const [publisherInput, setPublisherInput] = useState("");
     const [authorInput, setAuthorInput] = useState("");
 
-    const [workState, setState] = useState<WorksState>({ ...initialState });
-    const unsetState = () => setState({ ...initialState });
+    const defaultState = {
+        ...initialState,
+        publishers: data?.publisher ? [data.publisher.name] : [],
+        subjects: data?.subjects ? Array.from(data.subjects) : [],
+        languages: data?.language ? [data.language.name] : [],
+        authors: data?.authors ? Array.from(data.authors) : [],
+    }
 
+    const [workState, setState] = useState<WorksState>({ ...defaultState });
+    const unsetState = () => setState({ ...defaultState });
     const { setSnackBar } = useContext(SnackBarContext);
 
     const openSnack = (severity: Severity, message: string) => {
@@ -92,7 +102,7 @@ const PostPopup: React.FC<PostPopupProps> = ({ title, togglePopup, destination }
             return false;
         }
 
-        if (parseInt(weight) <= 0) {
+        if (parseFloat(weight) <= 0) {
             setSnackBar({ ...defaultSnackBar, open: true, severity: 'error', message: 'Вага має бути більшою за 0' });
             return false;
         }
@@ -141,7 +151,7 @@ const PostPopup: React.FC<PostPopupProps> = ({ title, togglePopup, destination }
                     isbn: isbn,
                     releaseYear: new Date().getFullYear(),
                     pages: parseInt(pages),
-                    weight: parseInt(weight),
+                    weight: parseFloat(weight),
                     quantity: parseInt(copies),
                     medium: medium,
                     language: { id: langId },
@@ -154,7 +164,13 @@ const PostPopup: React.FC<PostPopupProps> = ({ title, togglePopup, destination }
             } else {
                 body = { name: name }
             }
-            const res = await axios.post(`${serverURL}/${destination}/`, body, { withCredentials: true });
+
+            if (method === 'post') {
+                await axios.post(`${serverURL}/${destination}/`, body, { withCredentials: true });
+            } else {
+                await axios.put(`${serverURL}/${destination}/isbn/${isbn}/`, body, { withCredentials: true });
+            }
+
             openSnack('success', 'Успішно додано!');
         } catch (error: any) {
             console.log(error.response);
