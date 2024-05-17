@@ -8,7 +8,7 @@ export const subjectItems = {
     "Horror": '9780373031122',
     "Romance": '9780316015844',
     "LGBTQ+": '9780349429793',
-    "Contemporary": '9781797149493',
+    "Contemporary Fiction": '9781797149493',
     "Young Adult": '9780571191475',
     "Children's": '9780061650499',
     "Biography": '9780131962941',

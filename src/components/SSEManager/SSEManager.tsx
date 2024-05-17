@@ -36,10 +36,10 @@ const SSEManager: React.FC<SSEManagerProps> = ({ destination, onLog }) => {
     };
 
     const closeConnection = () => {
+        setConnected(false);
         if (source) {
             source.close();
             setSource(null);
-            setConnected(false);
         }
     };
 
@@ -48,7 +48,7 @@ const SSEManager: React.FC<SSEManagerProps> = ({ destination, onLog }) => {
             <Button inverted onClick={connectToSSE} disabled={isConnected} width="20rem">
                 Почати {mapping[destination as keyof typeof mapping]}
             </Button>
-            <Button inverted onClick={closeConnection} disabled={source === null} width="20rem">
+            <Button inverted onClick={closeConnection} disabled={!isConnected} width="20rem">
                 Перервати {mapping[destination as keyof typeof mapping]}
             </Button>
         </div>

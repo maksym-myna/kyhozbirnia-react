@@ -18,8 +18,8 @@ const BigQueryImport: React.FC = () => {
             <div className="big-query-imports-container">
                 <textarea className="text-field" ref={textareaRef} readOnly />
                 <div className="big-query-sses-container">
-                    <SSEManager destination="etl" onLog={handleLog} />
                     <SSEManager destination="populate" onLog={handleLog} />
+                    <SSEManager destination="etl" onLog={handleLog} />
                 </div>
             </div>
         </ConnectionContext.Provider>

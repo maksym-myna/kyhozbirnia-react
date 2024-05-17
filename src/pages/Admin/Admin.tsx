@@ -33,9 +33,9 @@ const Admin: React.FC = () => {
             }
             {selectedSection === 'Експорт та імпорт' &&
                 <>
-                    <h2 className='admin-page-subheader'>Імпорт в BigQuery</h2>
+                    <h2 className='admin-page-subheader'>Імпорт</h2>
                     <BigQueryImport />
-                    <h2 className='admin-page-subheader'>Експорт з BigQuery</h2>
+                    <h2 className='admin-page-subheader'>Експорт</h2>
                     <BigQueryExport />
                 </>
             }

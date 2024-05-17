@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./BigQueryExport.css";
 import { serverURL } from "../../config";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { Checkbox, FormControlLabel, Select, MenuItem, TextField, Grid } from "@
 import { SelectChangeEvent } from "@mui/material/Select";
 import Button from "../Button";
 import { saveAs } from 'file-saver';
+import { defaultSnackBar, Severity, SnackBarContext } from "../../contexts/SnackBarContext";
 
 
 type TableData = {
@@ -17,7 +18,9 @@ type FactData = {
 }
 
 type SelectedFields = {
-    [factName: string]: string[];
+    [factName: string]: {
+        [tableName: string]: string;
+    };
 }
 
 export const BigQueryExport = () => {
@@ -27,6 +30,7 @@ export const BigQueryExport = () => {
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
     const [limit, setLimit] = useState<string>("");
+    const { setSnackBar } = useContext(SnackBarContext);
 
     useEffect(() => {
         const fetchFields = async () => {
@@ -43,17 +47,32 @@ export const BigQueryExport = () => {
         setSelectedFact(event.target.value as string);
     };
 
-    const handleCheckboxChange = (fact: string, field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = (fact: string, tableName: string, field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedFields(prev => ({
             ...prev,
-            [fact]: event.target.checked
-                ? [...(prev[fact] || []), field]
-                : (prev[fact] || []).filter(f => f !== field)
+            [fact]: {
+                ...(prev[fact] || {}),
+                [tableName]: event.target.checked ? field : ""
+            }
         }));
     };
 
+    const openSnack = (severity: Severity, message: string) => {
+        setSnackBar({ ...defaultSnackBar, open: true, severity: severity, message: message });
+    }
+
     const handleDownload = async () => {
-        const fields = selectedFields[selectedFact]
+        const selectedFactFields = selectedFields[selectedFact] || {};
+        const fields = Object.values(selectedFactFields).filter(Boolean);
+
+        // Check if at least one _fact field is selected
+        const factFieldSelected = Object.keys(selectedFactFields).some(field => field.endsWith('_fact') && selectedFactFields[field]);
+
+        if (!factFieldSelected) {
+            openSnack('error', 'Оберіть метрику факта.');
+            return;
+        }
+
         const params = new URLSearchParams({
             fields: fields.join(','),
             limit: limit.toString(),
@@ -137,8 +156,8 @@ export const BigQueryExport = () => {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={selectedFields[selectedFact]?.includes(field) || false}
-                                                onChange={handleCheckboxChange(selectedFact, field)}
+                                                checked={selectedFields[selectedFact]?.[tableName] === field || false}
+                                                onChange={handleCheckboxChange(selectedFact, tableName, field)}
                                             />
                                         }
                                         label={field}

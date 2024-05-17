@@ -23,7 +23,7 @@ interface SplitButtonProps {
 const SplitButton: React.FC<SplitButtonProps> = ({ onClick, statuses }) => {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLDivElement>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     const optionsMapping: { [key: string]: ListingType } = {
         'Хочу прочитати': 'WANT_TO_READ',
