@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# Книгозбірня
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Description**
 
-## Available Scripts
+"Книгозбірня" is a web application designed to modernize library operations and promote reading in Ukraine. The website offers a user-friendly way to browse book information, borrow books, rate books, and create reading lists. 
 
-In the project directory, you can run:
+## **Key Features**
 
-### `npm start`
+*   **Online Book Ordering:** Users can browse the book catalog and place orders online. 
+*   **Ratings and Lists:** Users can rate books and add them to "Want to Read," "Currently Reading," and "Already Read" lists. 
+*   **Advanced Filtering:** Users can filter books by various attributes, including author, genre, language, and publisher. 
+*   **Admin Panel:** Administrators have access to dashboards with analytics, can export data, populate the database with historical data, and run ETL processes. 
+*   **Integration with Google OAuth 2.0:** Users can register and authenticate using their Google accounts. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to use:
+1. Clone the [back-end repo](https://github.com/maksym-myna/knyhozbirnia) and add your database connection info to application.yml
+2. Start the server running `mvn spring-boot:run` in the console or in your preffered IDE.
+3. Clone the [front-end repo](https://github.com/maksym-myna/kyhozbirnia-react) *(optionally change back-end url in properties)*
+4. Start the application running `npm start` in the console or in your preffered IDE.
+5. *[OPTIONAL] Clone the [data population repo](https://github.com/maksym-myna/dw-data-load-scripts) (and add credentials) for database population*
+6. Start the python script running `python scripts/data_parser.py` in the console or in your preffered IDE.
+7. *[OPTIONAL] Clone the [ETL repo](https://github.com/maksym-myna/etl) (and add credentials) to set up ETL-pipeline to BigQuery*
+8. Start the python script running `python etl.py` in the console or in your preffered IDE.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## **Database Schema**
+![EER](https://i.ibb.co/f8862GG/eer-1.png)
 
-### `npm test`
+## **Business Processes**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+*   Authorization
+*   Reading Tracking
+*   Loan Processing
+*   Entity Management by Administrator
 
-### `npm run build`
+## **Interface**
+* Start Page
+![](https://i.ibb.co/Qv5nK48/main.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Books Page
+![](https://i.ibb.co/ZKSJY9N/filtering.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Genres Page
+![](https://i.ibb.co/X5Sbqtd/genres.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Listing
+![](https://i.ibb.co/59xG4zq/listing.png)
+![](https://i.ibb.co/f1hdBd3/listing-filter.png)
 
-### `npm run eject`
+* Rating
+![](https://i.ibb.co/L8Qjpt5/rating.png)
+![](https://i.ibb.co/3YDtVsX/rating-filter.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Loan
+![](https://i.ibb.co/smyRfMV/loan.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Loaned books (admin view)
+![](https://i.ibb.co/C9d9LcB/profile.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Loaned books (user view)
+![](https://i.ibb.co/r0rhQxr/loans-from-user.png)
 
-## Learn More
+* Loans
+![](https://i.ibb.co/Sw8y7RD/loans.png)
+* Loan Return
+![](https://i.ibb.co/PxHpzhm/loan-by-administrator.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+* Work addition
+![](https://i.ibb.co/rsW5hKG/add-work.png)
+![](https://i.ibb.co/jLW4Qyh/added-work.png)
+
+* Work edit
+![](https://i.ibb.co/fXt3C9k/work-edit.png)
+![](https://i.ibb.co/3rxbD7N/edited-work.png)
+
+* Dashboards
+![](https://i.ibb.co/4ssx36V/dashboard-1.png)
+![](https://i.ibb.co/QpvnZyP/dashboard-2.png)
+![](https://i.ibb.co/CWYhqpS/dashboard-3.png)
+
+* Export & Import 
+![](https://i.ibb.co/PW7ZNBm/import-export.png)
+
+## **Tech Stack**
+
+### **Database**
+
+*   Google Cloud SQL (PostgreSQL)
+*   React + TypeScript
+*   Spring Boot
+*   Python
+*   SQLite
+*   Google Cloud Storage
+*   Apache Beam
+*   BigQuery
+*   Looker Studio
